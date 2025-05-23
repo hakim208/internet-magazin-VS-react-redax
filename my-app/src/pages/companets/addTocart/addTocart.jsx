@@ -74,8 +74,8 @@ const AddTocart = () => {
                 </table>
             </div>
             <div className='flex items-center w-[100%] justify-between mt-[20px] '>
-                <div> <button className='p-[13px_50px] text-[15px] border-2 rounded-[10px] text-gray-700 '>Return To Shop</button></div>
-                <div>  <button onClick={() => dispach(deleteAll())} className='p-[13px_50px] text-[15px]  text-red-500 border-2 rounded-[10px] '>Remove all</button></div>
+                <div> <button className='p-[10px_20px] md:p-[13px_50px] text-[15px] border-2 rounded-[10px] text-gray-700 '>Return To Shop</button></div>
+                <div>  <button onClick={() => dispach(deleteAll())} className='p-[10px_30px] md:p-[13px_50px] text-[15px]  text-red-500 border-2 rounded-[10px] '>Remove all</button></div>
             </div>
             <div className='mt-[40px] md:ml-[70%] w-[100%] md:w-[30%] text-black  border-black border-[1px] rounded-[5px] flex flex-col items-start gap-[10px] p-[10px_20px] '>
                 <p className='text-[25px] font-medium '>Cart Total</p>
