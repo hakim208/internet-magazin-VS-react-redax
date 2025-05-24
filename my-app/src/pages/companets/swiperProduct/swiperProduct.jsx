@@ -14,8 +14,6 @@ export default function SwiperProduct() {
     let dispach = useDispatch()
     let navigation = useNavigate()
 
-    console.log(data);
-
     function info(id) {
         dispach(infoProduct({id,navigation}))
     }

@@ -47,7 +47,6 @@ const InfoProduct = () => {
     let navigation = useNavigate()
     const { id } = useParams()
 
-    console.log(info);
 
     useEffect(() => {
         dispach(infoProduct({ id, navigation }))
@@ -73,7 +72,7 @@ const InfoProduct = () => {
                 <div className='flex flex-col w-[100%] md:w-[65%] '>
                     <div ref={sliderRef} className="keen-slider">
                         {info.images && info.images.map((e) => (
-                            <div className="keen-slider__slide number-slide1 w-[70%] " >
+                            <div className="keen-slider__slide number-slide1 w-[70%] " key={e.id} >
                                 <img
                                     className="w-[100%] md:h-[400px] "
                                     src={`${API}/images/${e.images}`}

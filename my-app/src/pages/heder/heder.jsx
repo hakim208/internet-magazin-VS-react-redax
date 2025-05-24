@@ -29,8 +29,6 @@ const Heder = () => {
     function deleteToken() {
         localStorage.removeItem("token")
     }
-
-    console.log(totalP);
     useEffect(() => {
         dispach(totalproduct())
     }, [])
@@ -130,10 +128,15 @@ const Heder = () => {
                         <img src={ImgSearch} alt="" className='w-[17px]' />
                     </div>
                     <div className='flex items-center gap-[10px] '>
-                        <img className='w-[25px] hidden md:flex' src={ImgLike} alt="" />
+                        <NavLink to='wshlist'>
+                            <div>
+                                {totalP == true ? <p className='bg-red-500 text-[10px] hidden md:block w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{totalP}</p> : <p></p>}
+                                <img className='w-[25px] hidden md:flex' src={ImgLike} alt="" />
+                            </div>
+                        </NavLink>
                         <NavLink to='addtocart'>
                             <div>
-                                <p className='bg-red-500 text-[10px] w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{totalP}</p>
+                                {totalP == true ? <p className='bg-red-500 text-[10px] w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{totalP}</p> : <p></p>}
                                 <img className='w-[25px] ' src={ImgKarzina} alt="" />
                             </div>
                         </NavLink>

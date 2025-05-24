@@ -109,7 +109,7 @@ export const Reducer = createAsyncThunk('counter/reducer', async (id, { dispatch
         )
         dispatch(getAddproduct())
         dispatch(totaldiscount())
-            dispatch(totalproduct())
+        dispatch(totalproduct())
 
     } catch (error) {
         console.error(error);
@@ -124,7 +124,7 @@ export const daleteProduct = createAsyncThunk('counter/daleteProduct', async (id
             }
         )
         dispatch(getAddproduct())
-            dispatch(totalproduct())
+        dispatch(totalproduct())
 
     } catch (error) {
         console.error(error);
@@ -140,7 +140,7 @@ export const deleteAll = createAsyncThunk('counter/deleteAll', async (_, { dispa
         )
         dispatch(getAddproduct())
         dispatch(totaldiscount())
-            dispatch(totalproduct())
+        dispatch(totalproduct())
 
     } catch (error) {
         console.error(error);
@@ -184,8 +184,6 @@ export const editUserProfil = createAsyncThunk('counter/editUserProfil', async (
                 headers: { "Authorization": `Bearer ${token}` }
             }
         )
-        console.log(data);
-        // return data.data
     } catch (error) {
         console.error(error);
     }
@@ -201,9 +199,20 @@ export const counterSlece = createSlice({
         info: [],
         totalDiscount: [],
         user: [],
-        editUser: []
+        editUser: [],
+        wishlist: JSON.parse(localStorage.getItem("wishlist")) || []
     },
-    reducers: {},
+    reducers: {
+        addWishlist: (state, action) => {
+            const iseXis = state.wishlist.find(e => e.id === action.payload.id)
+            if (iseXis) {
+                state.wishlist = state.wishlist.filter(e => e.id !== action.payload.id)
+            } else {
+                state.wishlist.push(action.payload)
+            }
+            localStorage.setItem("wishlist", JSON.stringify(state.wishlist))
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getProduct.fulfilled, (state, actions) => {
             state.data = actions.payload
@@ -224,5 +233,5 @@ export const counterSlece = createSlice({
         })
     }
 })
-
+export const {addWishlist} = counterSlece.actions
 export default counterSlece.reducer

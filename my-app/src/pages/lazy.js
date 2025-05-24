@@ -21,3 +21,4 @@ export const ExploreOurProducts= lazy(() => import("./companets/exploreOurProduc
 export const AddTocart= lazy(() => import("./companets/addTocart/addTocart"))
 export const InfoPrioduct= lazy(() => import("./companets/infoPrioduct/infoPrioduct"))
 export const Checkout= lazy(() => import("./checkout/checkout"))
+export const Wishlist= lazy(() => import("./wishlist/wishlist"))
