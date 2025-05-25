@@ -1,0 +1,27 @@
+.add {
+    background-color: #000000;
+    position: absolute;
+    width: 200px;
+    color: white;
+    padding: 5px 0px;
+    margin-top: 116px;
+    display: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.box:hover .add {
+   transition: color 0.5s;
+    display: block;
+}
+
+.add:hover {
+    background-color: red;
+}
+
+@media (max-width:1200px) {
+    .add{
+        width: 150px;
+        margin-top: 96px;
+    }
+}

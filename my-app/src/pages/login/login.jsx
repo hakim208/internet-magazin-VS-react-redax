@@ -16,7 +16,7 @@ const Login = () => {
         }
         try {
             let { data } = await axios.post(`${API}/Account/login`, newUser)
-            localStorage.setItem("token",data.data)
+            localStorage.setItem("token", data.data)
             toast.success("", {
                 description: (
                     <span className="text-[18px] text-gray-600">
@@ -25,14 +25,14 @@ const Login = () => {
                 ),
                 duration: 10000,
             });
+            window.location = '/'
             navigation("/")
             return data
         } catch (error) {
-            toast.error("Ошибка при регистрации");
+            toast.error("Неверное имя пользователя или пароль");
             console.error(error);
         }
     }
-
     return (
         <div>
             <div className='flex flex-col gap-[10px] items-start md:ml-[34.5%] ml-[3%] m-[100px_0px_30px_0px] '>

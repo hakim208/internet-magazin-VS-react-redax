@@ -23,11 +23,14 @@ import { totalproduct } from '../../entities/counter/counterSlece'
 
 const Heder = () => {
     const totalP = useSelector((state) => state.counter.totalP)
+    let wishlistUser = useSelector((state) => state.counter.wishlist)
+    let token = localStorage.getItem("token")
 
     const dispach = useDispatch()
 
     function deleteToken() {
         localStorage.removeItem("token")
+        window.location = "/"
     }
     useEffect(() => {
         dispach(totalproduct())
@@ -130,52 +133,115 @@ const Heder = () => {
                     <div className='flex items-center gap-[10px] '>
                         <NavLink to='wshlist'>
                             <div>
-                                {totalP == true ? <p className='bg-red-500 text-[10px] hidden md:block w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{totalP}</p> : <p></p>}
+                                {wishlistUser.length > 0 ? <p className='bg-red-500 text-[10px] hidden md:block w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{wishlistUser.length}</p> : <p></p>}
                                 <img className='w-[25px] hidden md:flex' src={ImgLike} alt="" />
                             </div>
                         </NavLink>
-                        <NavLink to='addtocart'>
-                            <div>
-                                {totalP == true ? <p className='bg-red-500 text-[10px] w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{totalP}</p> : <p></p>}
-                                <img className='w-[25px] ' src={ImgKarzina} alt="" />
-                            </div>
-                        </NavLink>
-                        <Popover>
-                            <PopoverTrigger asChild>
-                                <img className='w-[25px] ' src={ImgUser} alt="" />
-                            </PopoverTrigger>
-                            <PopoverContent>
-                                <div className='flex flex-col gap-[10px] '>
-                                    <Link to='/account'>
-                                        <div className='flex gap-[10px] items-center '>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                            </svg>
-                                            <p>Account</p>
-                                        </div>
-                                    </Link>
-                                    <Link to='/order'>
-                                        <div className='flex items-center gap-[10px] '>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 13.5H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-                                            </svg>
-                                            <p>My Order</p>
-                                        </div>
-                                    </Link>
-                                    <div className='flex items-center gap-[10px] md:hidden'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                        </svg>
-                                        <p>Wishlist</p>
-                                    </div>
-                                    <div onClick={deleteToken} className='flex items-center gap-[10px] '>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-                                        </svg>
-                                        <p>Logout</p>
-                                    </div>
+                        {
+                            token && <NavLink to='addtocart'>
+                                <div>
+                                    {totalP > 0 ? <p className='bg-red-500 text-[10px] w-[15px] h-[15px] absolute ml-[15px] mt-[-5px] rounded-[50%] text-white text-center '>{totalP}</p> : <p></p>}
+                                    <img className='w-[25px] ' src={ImgKarzina} alt="" />
                                 </div>
-                            </PopoverContent>
+                            </NavLink>
+                        }
+                        <Popover>
+                            <div className='md:block hidden '>
+                                <div className=''>
+                                    {
+                                        token && <PopoverTrigger asChild>
+                                            <img className='w-[25px] ' src={ImgUser} alt="" />
+                                        </PopoverTrigger>
+                                    }
+                                </div>
+                                <PopoverContent>
+                                    <div className='flex flex-col gap-[10px] '>
+                                        {
+                                            token && <Link to='/account'>
+                                                <div className='flex gap-[10px] items-center '>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                                    </svg>
+                                                    <p>Account</p>
+                                                </div>
+                                            </Link>
+                                        }
+                                        <Link to='/order'>
+                                            <div className='flex items-center gap-[10px] '>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 13.5H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                                </svg>
+                                                <p>My Order</p>
+                                            </div>
+                                        </Link>
+                                        <Link to='/wshlist' >
+                                            <div className='flex items-center gap-[10px] md:hidden'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                                </svg>
+                                                <p>Wishlist</p>
+                                            </div>
+                                        </Link>
+                                        {
+                                            token && <div onClick={deleteToken} className='flex items-center gap-[10px] '>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                                                </svg>
+                                                <p>Logout</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </PopoverContent>
+                            </div>
+                        </Popover>
+                        <Popover>
+                            <div className='md:hidden block '>
+                                <div className=''>
+                                    {
+                                        token && <PopoverTrigger asChild>
+                                            <img className='w-[25px] ' src={ImgUser} alt="" />
+                                        </PopoverTrigger>
+                                    }
+                                </div>
+                                <PopoverContent>
+                                    <div className='flex flex-col gap-[10px] '>
+                                        {
+                                            token && <Link to='/account'>
+                                                <div className='flex gap-[10px] items-center '>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                                    </svg>
+                                                    <p>Account</p>
+                                                </div>
+                                            </Link>
+                                        }
+                                        <Link to='/order'>
+                                            <div className='flex items-center gap-[10px] '>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 13.5H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                                </svg>
+                                                <p>My Order</p>
+                                            </div>
+                                        </Link>
+                                        <Link to='/wshlist' >
+                                            <div className='flex items-center gap-[10px] md:hidden'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                                </svg>
+                                                <p>Wishlist</p>
+                                            </div>
+                                        </Link>
+                                        {
+                                            token && <div onClick={deleteToken} className='flex items-center gap-[10px] '>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                                                </svg>
+                                                <p>Logout</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </PopoverContent>
+                            </div>
                         </Popover>
                     </div>
                 </div>

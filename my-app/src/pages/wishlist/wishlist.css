@@ -1,0 +1,22 @@
+.addtoCart {
+    background-color: #000000;
+    position: absolute;
+    width: 240px;
+    color: white;
+    padding: 5px 0px;
+    margin-top: 166px;
+    display: none;
+}
+.BoxCart{
+    background-color: #F5F5F5;
+    width: 240px;
+    height: 200px;
+}
+.BoxCart:hover .addtoCart {
+   transition: color 0.5s;
+    display: block;
+}
+
+.addtoCart:hover {
+    background-color: red;
+}

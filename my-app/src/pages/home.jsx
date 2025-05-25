@@ -4,6 +4,7 @@ import ImgPs5 from './images/ps5-slim-goedkope-playstation_large 1.png'
 import ImgWoman from './images/attractive-woman-wearing-hat-posing-black-background 1.png'
 import ImgUjl from './images/69-694768_amazon-echo-png-clipart-transparent-amazon-echo-png 1.png'
 import ImgParfium from './images/652e82cd70aa6522dd785109a455904c.png'
+import { Link } from 'react-router'
 
 const Home = () => {
     const targetDate = new Date(Date.now() + 1000 * 60 * 1000)
@@ -47,7 +48,9 @@ const Home = () => {
                 <FlashSalesTimer targetDate={targetDate} onComplete={() => alert('Флэш-распродажа завершена!')} className />
             </div>
             <SwiperProduct />
-            <button className='bg-[#DB4444] p-[15px_50px] rounded-[5px] text-white md:ml-[43%] ml-[20%] m-[50px_0px] '>View All Products</button>
+            <Link to='/explorProduct'>
+                <button className='bg-[#DB4444] p-[15px_50px] rounded-[5px] text-white md:ml-[43%] ml-[20%] m-[50px_0px] '>View All Products</button>
+            </Link>
             <CategoriProduct />
             <hr className='w-[90%] m-auto mt-[30px] mb-[30px] ' />
             <SellingProduct />

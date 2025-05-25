@@ -3,19 +3,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSelector, useDispatch } from 'react-redux'
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { addTocart, getProduct, infoProduct } from '../../../entities/counter/counterSlece'
+import { addTocart, addWishlist, getProduct, infoProduct } from '../../../entities/counter/counterSlece'
 import './swiperProduct.css'
 import ImgFiveStart from '../../images/Five star.png'
 import { Link, useNavigate } from 'react-router';
 
 export default function SwiperProduct() {
     const data = useSelector((state) => state.counter.data)
+    let wishlistUser = useSelector((state) => state.counter.wishlist)
     let API = import.meta.env.VITE_API_URL
     let dispach = useDispatch()
     let navigation = useNavigate()
 
     function info(id) {
-        dispach(infoProduct({id,navigation}))
+        dispach(infoProduct({ id, navigation }))
     }
 
     useEffect(() => {
@@ -56,8 +57,8 @@ export default function SwiperProduct() {
                                                 <p>-34%</p>
                                             </div>
                                             <div className='absolute ml-[65%] md:ml-[99%] flex flex-col items-center gap-[10px]'>
-                                                <div className='bg-white p-[3px] rounded-[80px] '>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                <div onClick={() => dispach(addWishlist(e))} className='p-[3px] rounded-[80px] '>
+                                                    <svg style={{ color: wishlistUser.find((el) => el.id == e.id) ? "white" : "red", backgroundColor: wishlistUser.find((el) => el.id == e.id) ? "red" : "white" }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 rounded-[50%] ">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                                     </svg>
                                                 </div>

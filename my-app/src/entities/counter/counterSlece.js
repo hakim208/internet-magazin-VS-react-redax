@@ -16,7 +16,7 @@ export const getProduct = createAsyncThunk('counter/getProduct', async () => {
 
 export const addTocart = createAsyncThunk('counter/addTocart', async (id, { dispatch }) => {
     if (!token) {
-        toast.error(`Shumo boyad registratsia kuned`);
+        toast.error(`Вы должны войти в систему`);
     }
     else {
         try {
@@ -177,13 +177,14 @@ export const userProfilById = createAsyncThunk('counter/userProfilById', async (
     }
 })
 
-export const editUserProfil = createAsyncThunk('counter/editUserProfil', async (User, { dispatch }) => {
+export const editUserProfil = createAsyncThunk('counter/editUserProfil', async (form, { dispatch }) => {
     try {
-        let { data } = await axios.put(`${API}/UserProfile/update-user-profile`, User,
+        let { data } = await axios.put(`${API}/UserProfile/update-user-profile`, form,
             {
                 headers: { "Authorization": `Bearer ${token}` }
             }
         )
+        window.location = "/account"
     } catch (error) {
         console.error(error);
     }
@@ -204,13 +205,20 @@ export const counterSlece = createSlice({
     },
     reducers: {
         addWishlist: (state, action) => {
-            const iseXis = state.wishlist.find(e => e.id === action.payload.id)
+            const iseXis = state.wishlist.find((e) => e.id == action.payload.id)
             if (iseXis) {
                 state.wishlist = state.wishlist.filter(e => e.id !== action.payload.id)
             } else {
                 state.wishlist.push(action.payload)
             }
             localStorage.setItem("wishlist", JSON.stringify(state.wishlist))
+        },
+        deleteWishlis: (state, action) => {
+            state.wishlist = state.wishlist.filter(e => e.id !== action.payload.id)
+            localStorage.setItem("wishlist", JSON.stringify(state.wishlist))
+        },
+        newData: (state, action) => {
+            state.data = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -233,5 +241,5 @@ export const counterSlece = createSlice({
         })
     }
 })
-export const {addWishlist} = counterSlece.actions
+export const { addWishlist, deleteWishlis, newData } = counterSlece.actions
 export default counterSlece.reducer
