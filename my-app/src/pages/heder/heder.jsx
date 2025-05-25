@@ -196,13 +196,9 @@ const Heder = () => {
                         </Popover>
                         <Popover>
                             <div className='md:hidden block '>
-                                <div className=''>
-                                    {
-                                        token && <PopoverTrigger asChild>
-                                            <img className='w-[25px] ' src={ImgUser} alt="" />
-                                        </PopoverTrigger>
-                                    }
-                                </div>
+                                <PopoverTrigger asChild>
+                                    <img className='w-[25px] ' src={ImgUser} alt="" />
+                                </PopoverTrigger>
                                 <PopoverContent>
                                     <div className='flex flex-col gap-[10px] '>
                                         {
