@@ -112,7 +112,7 @@ const ExploreOurProducts = () => {
                     {
                         data.length > 0 && data.map((e) => {
                             return (
-                                <div className=' flex flex-col w-[150px] md:w-[200px] h-[200px] md:h-[300px] ' key={e.id} >
+                                <div className=' flex flex-col w-[41%] md:w-[200px] h-[200px] md:h-[300px] ' key={e.id} >
                                     <div className='box'>
                                         <div className='bg-[#F5F5F5] rounded-[10px] w-[100%] '>
                                             <div className='absolute md:ml-[11%] ml-[30%]  flex flex-col items-center gap-[10px]'>

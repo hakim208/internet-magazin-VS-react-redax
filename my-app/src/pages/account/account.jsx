@@ -61,7 +61,7 @@ const Account = () => {
         </div>
         <form onSubmit={edituser} className='md:w-[70%] w-[100%] p-[20px] shadow-2xl flex flex-col items-start gap-[20px] '>
           <p className='text-[#DB4444] text-[20px] font-medium '>Profile</p>
-          <img className='w-[100px] rounded-[50%] m-auto absolute ml-[27%] mt-[-16%] md:mt-[-4%]  ' src={`${API}/images/${editImg}`} alt="" />
+          <img className='w-[100px] h-[100px] rounded-[50%] m-auto absolute ml-[27%] mt-[-16%] md:mt-[-4%]  ' src={`${API}/images/${editImg}`} alt="" />
           <div className='w-[100%] flex flex-col md:flex-row justify-between gap-[20px] '>
             <input value={editName} onChange={(e) => setEditName(e.target.value)} className='border-2 border-gray-300  p-[10px] rounded-[5px] md:w-[50%] ' type="text" />
             <input value={editLastName} onChange={(e) => setEditLastName(e.target.value)} className='border-2 border-gray-300  p-[10px] rounded-[5px] md:w-[50%] ' type="text" placeholder='Last name' />
